@@ -1,0 +1,72 @@
+.product-table-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.product-table img {
+  width: 140px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Nút sửa và xóa */
+.edit-btn {
+  background-color: #28a745;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 0.85;
+}
+.add-user-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.product-table-container a {
+  margin-bottom: 50px;
+}
+
+.add-user-btn {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+}

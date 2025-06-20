@@ -60,7 +60,7 @@ class AuthenticationController
                     $role = trim(strtolower($user['role']));
                     $redirectUrl = $role === 'admin'
                         ? 'https://localhost/MVC_QLBanHang/publics/admin.php?controller=admin&action=index'
-                        : 'https://localhost/MVC_QLBanHang/publics/user.php';
+                        : 'https://localhost/MVC_QLBanHang/publics/admin.php?controller=user&action=redichome';
 
                     header("Location: $redirectUrl");
                     exit;
@@ -73,5 +73,15 @@ class AuthenticationController
         include "../views/authentication/login.php";
         ob_end_flush();
     }
+    public function logout()
+{
+    session_start();
+    session_unset();
+    session_destroy();
+
+    header("Location: admin.php?controller=authentication&action=login");
+    exit;
+}
+
 }
 ?>

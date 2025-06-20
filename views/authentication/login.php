@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Login Page</title>
-  <link rel="stylesheet" href="../views/authentication/login.css">
+  <link rel="stylesheet" href="../publics/css/login.css">
 </head>
 <body>
   <div class="container">
@@ -42,7 +42,7 @@
     </div>
 
     <div class="illustration">
-      <img src="../publics/assets/img/anhlogin.jpg" alt="Game Character">
+      <img src="../publics/images/anhlogin.jpg" alt="Game Character">
     </div>
   </div>
 </body>

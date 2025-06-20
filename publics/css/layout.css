@@ -4,12 +4,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  top: 0;
   font-family: "Poppins", sans-serif;
 }
-
+body {
+  top: 0;
+}
 /* Sidebar */
 .sidebar {
   position: fixed;
+  top: 0px;
+  left: 0px;
   width: 240px;
   height: 100%;
   background: #0a2558;
@@ -65,7 +70,7 @@
   white-space: nowrap;
 }
 .sidebar .nav-links .log_out {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
@@ -230,7 +235,8 @@ nav .profile-details i {
   width: 50px;
   line-height: 50px;
   text-align: center;
-  margin: -15px 0 0 6px;
+  /* margin: -35px 0 0 6px; */
+  margin: 0 10px 10px 300px;
 }
 .cart.two {
   background: #c0f2d8;
@@ -409,4 +415,7 @@ nav .profile-details i {
     width: calc(100% - 60px);
     left: 60px;
   }
+}
+.content {
+  margin-top: 80px;
 }

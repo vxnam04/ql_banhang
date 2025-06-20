@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Login Page</title>
-  <link rel="stylesheet" href="../views/authentication/register.css">
+  <link rel="stylesheet" href="../publics/css/register.css">
 </head>
 <body>
   <div class="container">
+     <div class="illustration">
+      <img src="../publics/images/anhlogin.jpg" alt="Game Character">
+    </div>
     <div class="box">
       <div class="logo">🐾</div>
       <h2>Welcome back</h2>
@@ -38,9 +41,7 @@
 
     </div>
 
-    <div class="illustration">
-      <img src="../publics/assets/img/anhlogin.jpg" alt="Game Character">
-    </div>
+   
   </div>
 </body>
 </html>
