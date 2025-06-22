@@ -419,3 +419,11 @@ nav .profile-details i {
 .content {
   margin-top: 80px;
 }
+.create_product {
+  display: flex;
+  justify-content: center; /* Căn giữa ngang */
+  align-items: center; /* Căn giữa dọc */
+  height: calc(
+    100vh - 60px
+  ); /* Chiếm toàn bộ chiều cao màn hình trừ phần navbar */
+}

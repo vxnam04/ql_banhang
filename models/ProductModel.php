@@ -23,4 +23,19 @@ class ProductModel {
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$name, $price, $image,$description]);
     }
+      // ✅ Lấy sản phẩm có phân trang
+     public function countAllProducts()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) as total FROM products");
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public function getProductsByPage($start, $limit)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM products LIMIT :start, :limit");
+        $stmt->bindValue(':start', (int)$start, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -12,6 +12,28 @@ class productController {
         include "../views/admin/product/list.php";
         
     }
+public function getProductList() {
+    $limit = 10;
+    $total = $this->model->countAllProducts();
+
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $page = max(1, $page);
+    $total_page = ceil($total / $limit);
+    $start = ($page - 1) * $limit;
+
+    $products = $this->model->getProductsByPage($start, $limit);
+
+    // ✅ return mảng dữ liệu để controller khác có thể dùng
+    return [
+        'show_product' => $products,
+        'page' => $page,
+        'total_page' => $total_page
+    ];
+    
+}
+
+
+
 public function createproduct(){
   require_once '../views/admin/product/create-product.php';
 }

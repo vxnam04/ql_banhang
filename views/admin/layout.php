@@ -103,9 +103,14 @@
 <div class="content">
   <?= $content ?? ''?>
   <?= $contentuser ?? ''?>
-</div>
+ 
+
       
         </div>
+        </div>
+ <div class="create_product">
+  <?= $create_product ?? ''?>
+</div>
       </div>
     </section>
 
