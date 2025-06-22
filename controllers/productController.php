@@ -71,11 +71,9 @@ public function createproduct(){
         exit;
     }
 }
-
 public function edit(){
     $id = $_GET['id'];
     $product = $this->model->find($id);
-
     require_once '../views/admin/product/edit.php';
 }
 public function update() {
@@ -99,30 +97,19 @@ public function update() {
             if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
                 $image = '../uploads/' . $imageName;
             }
-        }
-
-   
-$this->model->updateProduct($name, $price, $image, $description, $id);
-
+        }  
+        $this->model->updateProduct($name, $price, $image, $description, $id);
         header("Location: admin.php?controller=product&action=index");
         exit;
     }
 }
 // delete
-public function delete() {
+    public function delete() {
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $this->model->deleteProduct($id);
     }
-
-    // Sau khi xóa xong thì chuyển về danh sách sản phẩm
     header("Location: admin.php?controller=product&action=index");
     exit;
 }
-
-    // public function detail() {
-    //     $id = $_GET['id'] ?? 0;
-    //     $product = $this->model->getById($id);
-    //     include "../views/product/detail.php";
-    // }
 }

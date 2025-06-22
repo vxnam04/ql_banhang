@@ -34,9 +34,10 @@ ob_start();
                 <td><?= $users['id'] ?></td>
                 <td><?= $users['name'] ?></td>
                 <td><?= $users['email'] ?></td>
+    
                 <td>
-                    <a class="ws-btn user-edit-btn" href="index.php?controller=user&action=edit&id=<?= $users['id'] ?>">Sửa</a>
-                    <a class="ws-btn user-delete-btn" href="index.php?controller=user&action=delete&id=<?= $users['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                    <a class="ws-btn user-edit-btn" href="admin.php?controller=user&action=edit&id=<?= $users['id'] ?>">Sửa</a>
+                    <a class="ws-btn user-delete-btn" href="admin.php?controller=user&action=delete&id=<?= $users['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
     
                 </td>
             </tr>

@@ -44,4 +44,20 @@ class UserModel {
             ':role'     => $role
         ]);
     }
+    // sua user
+    public function updateUser($id, $name, $email, $password) {
+        $sql = $this->conn->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
+         $sql->execute([$id, $name, $email, $password]);
+    }
+
+public function find($id) {
+    $sql = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+    $sql->execute([$id]);
+    return $sql->fetch(PDO::FETCH_ASSOC);
+}
+// delete
+public function delete($id) {
+    $stmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->execute([$id]);
+}
 }

@@ -44,11 +44,13 @@ class ProductModel {
     $stmt->execute([$name, $price, $image, $description, $id]);
 }
 
+// Trong ProductModel.php
 public function find($id) {
-    $stmt = $this->db->prepare("SELECT * FROM products WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC); // PHẢI có return
 }
+
 
 // delete
 public function deleteProduct($id) {

@@ -35,8 +35,6 @@ public function create(){
             echo "<script>alert('Email đã tồn tại. Vui lòng chọn email khác.'); history.back();</script>";
             return;
         }
-
-            // Mã hóa mật khẩu (bắt buộc)
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $result = $this->model->createUser($name, $email, $hashedPassword, $role);
@@ -49,5 +47,36 @@ public function create(){
             }
         }
     }
+    // edit
+   public function edit() {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $user = $this->model->find($id);
+            include './../views/admin/user/edit-user.php'; // file bạn đang viết ở trên
+        } else {
+            echo "Không tìm thấy ID người dùng.";
+        }
+    }
+    // Xử lý cập nhật
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
+            $this->model->updateUser($id, $name, $email, $password);
+            header('Location: ./admin.php?controller=user&action=getuser');
+            exit();
+        }
+    }
+    // delete
+    public function delete() {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $this->model->delete($id);
+    }
+    header("Location: admin.php?controller=user&action=getuser");
+    exit;
+}
 }
