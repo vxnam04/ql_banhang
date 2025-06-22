@@ -38,4 +38,22 @@ class ProductModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // edit
+   public function updateProduct($name, $price, $image, $description, $id) {
+    $stmt = $this->db->prepare("UPDATE products SET name = ?, price = ?, image = ?, description = ? WHERE id = ?");
+    $stmt->execute([$name, $price, $image, $description, $id]);
+}
+
+public function find($id) {
+    $stmt = $this->db->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// delete
+public function deleteProduct($id) {
+    $stmt = $this->db->prepare("DELETE FROM products WHERE id = ?");
+    $stmt->execute([$id]);
+}
+
 }

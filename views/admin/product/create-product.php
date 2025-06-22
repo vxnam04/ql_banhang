@@ -6,10 +6,14 @@ ob_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="../publics/css/create-product.css" />
+     <link rel="stylesheet" href="./css/create-product.css" />
     <title>Document</title>
 </head>
 <body>
+   <div class="exit">
+  <button onclick="history.back()">← Quay lại</button>
+</div>
+
     <div class="box_create_product">
 <h2 class="form-title">Thêm sản phẩm mới</h2>
 <form action="admin.php?controller=product&action=store" method="POST" enctype="multipart/form-data" class="product-form">

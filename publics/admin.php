@@ -6,8 +6,8 @@
 // $controller = new $controllerClass();
 // $controller->$action();
 
-$controllerName = $_GET['controller'] ?? 'admin';
-$action = $_GET['action'] ?? 'index';
+$controllerName = $_GET['controller'] ?? 'authentication';
+$action = $_GET['action'] ?? 'login';
 
 $controllerClass = $controllerName . 'Controller';
 $controllerFile = "../controllers/{$controllerClass}.php";

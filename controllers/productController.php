@@ -72,6 +72,53 @@ public function createproduct(){
     }
 }
 
+public function edit(){
+    $id = $_GET['id'];
+    $product = $this->model->find($id);
+
+    require_once '../views/admin/product/edit.php';
+}
+public function update() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
+        $name = $_POST['name'] ?? '';
+        $price = $_POST['price'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = $_POST['current_image'] ?? ''; // ảnh cũ
+
+        // Nếu có upload ảnh mới
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+            $imageName = time() . '_' . basename($_FILES['image']['name']);
+            $uploadDir = __DIR__ . '/../uploads/';
+            $imagePath = $uploadDir . $imageName;
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $image = '../uploads/' . $imageName;
+            }
+        }
+
+   
+$this->model->updateProduct($name, $price, $image, $description, $id);
+
+        header("Location: admin.php?controller=product&action=index");
+        exit;
+    }
+}
+// delete
+public function delete() {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $this->model->deleteProduct($id);
+    }
+
+    // Sau khi xóa xong thì chuyển về danh sách sản phẩm
+    header("Location: admin.php?controller=product&action=index");
+    exit;
+}
 
     // public function detail() {
     //     $id = $_GET['id'] ?? 0;

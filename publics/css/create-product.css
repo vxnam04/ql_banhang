@@ -51,3 +51,24 @@
 .submit-btn:hover {
   background-color: #0056b3;
 }
+.exit {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+
+.exit button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.exit button:hover {
+  background-color: #d9363e;
+}

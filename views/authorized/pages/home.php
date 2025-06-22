@@ -385,39 +385,42 @@
                         
                         <div class="home-product">
                             <!-- Grid-> Row -> column -->
-                <!-- list product -->
-               <div class="box">
-    <?= $home_list ?? '' ?>
-</div>
+                            <!-- list product -->
+                            <div class="box">
+                                <?= $home_list ?? '' ?>
+                            </div>
 
-<!-- PHÂN TRANG -->
-<ul class="pagination home-product__pagination">
-    <?php if ($page > 1): ?>
-        <li class="pagination-item">
-            <a href="?controller=user&action=redichome&page=<?= $page - 1 ?>" class="pagination-item__link">
-                <i class="pagination-item__icon fas fa-chevron-left"></i>
-            </a>
-        </li>
-    <?php endif; ?>
+                            <!-- PHÂN TRANG -->
+                            <ul class="pagination home-product__pagination">
+                                 <?php if ($page > 1): ?>
+                                 <li class="pagination-item">
+                                    <a href="?controller=user&action=redichome&page=<?= $page - 1 ?>" class="pagination-item__link">
+                                        <i class="pagination-item__icon fas fa-chevron-left"></i>
+                                    </a>
+                                 </li>
+                                <?php endif; ?>
 
-    <?php for ($i = 1; $i <= $total_page; $i++): ?>
-        <li class="pagination-item <?= ($i == $page) ? 'pagination-item--active' : '' ?>">
-            <a href="?controller=user&action=redichome&page=<?= $i ?>" class="pagination-item__link"><?= $i ?></a>
-        </li>
-    <?php endfor; ?>
+                                <?php for ($i = 1; $i <= $total_page; $i++): ?>
+                                    <li class="pagination-item <?= ($i == $page) ? 'pagination-item--active' : '' ?>">
+                                        <a href="?controller=user&action=redichome&page=<?= $i ?>" class="pagination-item__link"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
 
-    <?php if ($page < $total_page): ?>
-        <li class="pagination-item">
-            <a href="?controller=user&action=redichome&page=<?= $page + 1 ?>" class="pagination-item__link">
-                <i class="pagination-item__icon fas fa-chevron-right"></i>
-            </a>
-        </li>
-    <?php endif; ?>
-</ul>
+                                <?php if ($page < $total_page): ?>
+                                    <li class="pagination-item">
+                                        <a href="?controller=user&action=redichome&page=<?= $page + 1 ?>" class="pagination-item__link">
+                                            <i class="pagination-item__icon fas fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
 
-          </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
         </div>
-
+<!-- footer -->
         <footer class="footer">
             <div class="grid wide">
                 <div class="row">

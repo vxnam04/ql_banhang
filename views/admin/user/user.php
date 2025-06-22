@@ -16,7 +16,7 @@ ob_start();
    <h2>Danh sách User</h2>
 
 <div class="user-actions">
-    <a href="index.php?controller=user&action=create" class="ws-btn add-user-btn">Thêm mới</a>
+    <a href="admin.php?controller=user&action=create" class="ws-btn add-user-btn">Thêm mới</a>
 </div>
 
     <table class="my_table user-table">
@@ -37,6 +37,7 @@ ob_start();
                 <td>
                     <a class="ws-btn user-edit-btn" href="index.php?controller=user&action=edit&id=<?= $users['id'] ?>">Sửa</a>
                     <a class="ws-btn user-delete-btn" href="index.php?controller=user&action=delete&id=<?= $users['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+    
                 </td>
             </tr>
             <?php endforeach; ?>

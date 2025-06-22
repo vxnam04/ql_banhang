@@ -32,4 +32,16 @@ class UserModel {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$role, $id]);
     }
+
+      public function createUser($name, $email, $password, $role) {
+        $sql = "INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)";
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([
+            ':name'     => $name,
+            ':email'    => $email,
+            ':password' => $password,
+            ':role'     => $role
+        ]);
+    }
 }

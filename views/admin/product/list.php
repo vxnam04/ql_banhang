@@ -40,8 +40,8 @@ ob_start();
                 <td><img src="<?= $sp['image'] ?>" alt="img"></td>
                 <td><?= $sp['description'] ?></td>
                 <td>
-                    <a class="ws-btn edit-btn" href="index.php?controller=product&action=edit&id=<?= $sp['id'] ?>">Sửa</a>
-                    <a class="ws-btn delete-btn" href="index.php?controller=product&action=delete&id=<?= $sp['id'] ?>" onclick="return confirm('Xóa?')">Xóa</a>
+                    <a class="ws-btn edit-btn" href="admin.php?controller=product&action=edit&id=<?= $sp['id'] ?>">Sửa</a>
+                    <a class="ws-btn delete-btn" href="admin.php?controller=product&action=delete&id=<?= $sp['id'] ?>" onclick="return confirm('Xóa?')">Xóa</a>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -110,6 +110,7 @@
         </div>
  <div class="create_product">
   <?= $create_product ?? ''?>
+  <?= $edit_product ?? ''?>
 </div>
       </div>
     </section>
