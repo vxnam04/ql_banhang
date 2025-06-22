@@ -1,40 +1,60 @@
 <?php
 require_once '../models/UserModel.php';
 require_once __DIR__ . '/productController.php';
-class UserController {
+class UserController
+{
     private $model;
-     public function __construct() {
+    public function __construct()
+    {
         $this->model = new UserModel();
     }
-    public function getuser(){
+    public function getuser()
+    {
         $user = $this->model->getAllUsers();
         include "../views/admin/user/user.php";
     }
-    
-    public function redichome() {
-    $productController = new ProductController();
-    $data = $productController->getProductList();
 
-    // Giải nén biến để truyền vào view
-    $show_product = $data['show_product'];
-    $page = $data['page'];
-    $total_page = $data['total_page'];
+    public function redichome()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    include "../views/authorized/pages/page_list_product.php";
-}
-public function create(){
-    include "../views/admin/user/create-user.php";
-}
-   public function insertUser() {
+        $productController = new ProductController();
+        $data = $productController->getProductList();
+
+        $show_product = $data['show_product'];
+        $page = $data['page'];
+        $total_page = $data['total_page'];
+
+        // ✅ Thêm dòng này:
+        $user = $_SESSION['user'] ?? null;
+
+        include "../views/authorized/pages/page_list_product.php";
+    }
+
+    // public function index()
+    // {
+
+    //     session_start(); // Luôn đảm bảo session được bật
+    //     include "../views/authorized/pages/home.php";
+    //     $user = $_SESSION['user'] ?? null;
+    // }
+    public function create()
+    {
+        include "../views/admin/user/create-user.php";
+    }
+    public function insertUser()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name     = $_POST['name'] ?? '';
             $email    = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
             $role     = $_POST['role'] ?? 'user';
-             if ($this->model->getUserByEmail($email)) {
-            echo "<script>alert('Email đã tồn tại. Vui lòng chọn email khác.'); history.back();</script>";
-            return;
-        }
+            if ($this->model->getUserByEmail($email)) {
+                echo "<script>alert('Email đã tồn tại. Vui lòng chọn email khác.'); history.back();</script>";
+                return;
+            }
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $result = $this->model->createUser($name, $email, $hashedPassword, $role);
@@ -48,7 +68,8 @@ public function create(){
         }
     }
     // edit
-   public function edit() {
+    public function edit()
+    {
         $id = $_GET['id'] ?? null;
         if ($id) {
             $user = $this->model->find($id);
@@ -58,7 +79,8 @@ public function create(){
         }
     }
     // Xử lý cập nhật
-    public function update() {
+    public function update()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $name = $_POST['name'];
@@ -71,12 +93,13 @@ public function create(){
         }
     }
     // delete
-    public function delete() {
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $this->model->delete($id);
+    public function delete()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->model->delete($id);
+        }
+        header("Location: admin.php?controller=user&action=getuser");
+        exit;
     }
-    header("Location: admin.php?controller=user&action=getuser");
-    exit;
-}
 }

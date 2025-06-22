@@ -1,5 +1,13 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$user = $_SESSION['user'] ?? null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +20,13 @@
     <link rel="stylesheet" href="./css/access-css-home/base.css">
     <link rel="stylesheet" href="./css/access-css-home/main.css">
     <link rel="stylesheet" href="./css/access-css-home/responsive.css">
+    <link rel="stylesheet" href="./css/access-css-home/home.css">
     <!--[if lte IE 6]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha512-qWVvreMuH9i0DrugcOtifxdtZVBBL0X75r9YweXsdCHtXUidlctw7NXg5KVP3ITPtqZ2S575A0wFkvgS2anqSA==" crossorigin="anonymous"></script>
     <![endif]-->
-   
+
 </head>
+
 <body>
     <!-- Block Element Modifier -->
     <div class="app">
@@ -25,7 +35,7 @@
                 <nav class="header__navbar hide-on-tablet-and-mobile">
                     <ul class="header__navbar-list">
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
-                            Vào cửa hàng của Nguyễn Hưng
+                            Wellcome
                             <!-- Header QR code -->
                             <div class="header__qr">
                                 <img src="./publics/css/access-css-home/img/qr_code.png" alt="QR code" class="header__qr-img">
@@ -128,32 +138,41 @@
                         </li>
                         <!-- <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                         <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
-                            <li class="header__navbar-item header__navbar-user">
-                                <img src="./publics/css/access-css-home/img/logo.png" alt="" class="header__navbar-user-img">
-                                <span class="header__navbar-user-name">Văn Hưng</span>
-                                
-                                <ul class="header__navbar-user-menu">
-                                    <li class="header__navbar-user-item">
-                                        <a href="">Tài khoản của tôi</a>
-                                    </li>
-                                    <li class="header__navbar-user-item">
-                                        <a href="">Địa chỉ của tôi</a>
-                                    </li>
-                                    <li class="header__navbar-user-item">
-                                        <a href="">Đơn mua</a>
-                                    </li>
-                                    <li class="header__navbar-user-item">
-                                        <a href="">Đăng xuất</a>
-                                    </li>
-                                </ul>
-                                
-                            </li>
+                        <li class="header__navbar-item header__navbar-user">
+                            <div class="profile-details" onclick="toggleDropdown()">
+                                <img src="./images/Game Account creation and Login page.jpg" alt="Avatar" class="avatar" />
+                                <div class="dropdown-header">
+                                    <strong><?= htmlspecialchars($user['name'] ?? 'Tên người dùng') ?></strong>
+                                </div>
+                                <i class="bx bx-chevron-down arrow-icon"></i>
+                                <div id="dropdown-menu" class="dropdown-menu">
+                                    <a href="#">
+                                        <i class="bx bx-user"></i>
+                                        <span>Trang cá nhân</span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="bx bx-cog"></i>
+                                        <span>Cài đặt</span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="bx bx-shield-quarter"></i>
+                                        <span>Quản lý tài khoản</span>
+                                    </a>
+                                    <hr />
+                                    <a href="./admin.php?controller=authentication&action=logout">
+                                        <i class="bx bx-log-out"></i>
+                                        <span>Đăng xuất</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </li>
                     </ul>
                 </nav>
                 <!-- Header with search -->
                 <div class="header-with-search">
                     <div class="header__seacher-and-bar">
-                        <a href="#header__nav-bar" class="header__bar" >
+                        <a href="#header__nav-bar" class="header__bar">
                             <i class="fas fa-bars header__bar-icon"></i>
                         </a>
                         <!-- layout seacher bar on mobile and tablet -->
@@ -189,7 +208,7 @@
                         </label>
                     </div>
                     <a class="header__logo hide-on-tablet" href="">
-                        <img src="./publics/css/access-css-home/img/logo.png" alt="" class="header__logo-img">
+                        <img src="./images/anhlogin.jpg" alt="" class="header__logo-img">
                     </a>
                     <input type="checkbox" hidden id="checkbox" class="header__input-temp">
 
@@ -295,7 +314,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    
+
                                 </ul>
 
                                 <a href="" class="btn header__cart-view-cart btn--primary">Xem giỏ hàng</a>
@@ -319,9 +338,9 @@
                 </li>
             </ul>
         </header>
-      
+
         <div class="app__container">
-          <div class="grid wide">
+            <div class="grid wide">
                 <div class="row  sm-gutter app__content">
                     <div class="col l-2 m-0 c-0">
                         <nav class="category">
@@ -380,9 +399,9 @@
                             </div>
 
                         </div>
-                       
-                       
-                        
+
+
+
                         <div class="home-product">
                             <!-- Grid-> Row -> column -->
                             <!-- list product -->
@@ -392,12 +411,12 @@
 
                             <!-- PHÂN TRANG -->
                             <ul class="pagination home-product__pagination">
-                                 <?php if ($page > 1): ?>
-                                 <li class="pagination-item">
-                                    <a href="?controller=user&action=redichome&page=<?= $page - 1 ?>" class="pagination-item__link">
-                                        <i class="pagination-item__icon fas fa-chevron-left"></i>
-                                    </a>
-                                 </li>
+                                <?php if ($page > 1): ?>
+                                    <li class="pagination-item">
+                                        <a href="?controller=user&action=redichome&page=<?= $page - 1 ?>" class="pagination-item__link">
+                                            <i class="pagination-item__icon fas fa-chevron-left"></i>
+                                        </a>
+                                    </li>
                                 <?php endif; ?>
 
                                 <?php for ($i = 1; $i <= $total_page; $i++): ?>
@@ -416,11 +435,11 @@
                             </ul>
 
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
-<!-- footer -->
+        <!-- footer -->
         <footer class="footer">
             <div class="grid wide">
                 <div class="row">
@@ -505,19 +524,19 @@
                     </div>
                 </div>
                 <div class="row"></div>
-                    <p class="footer__text">@2020 - Bản quyền thuộc về Công ty TNHH Nguyễn Hưng</p>
-                </div>
+                <p class="footer__text">@2020 - Bản quyền thuộc về Công ty TNHH Nguyễn Hưng</p>
             </div>
-        </footer>
+    </div>
+    </footer>
     </div>
     <!-- modal -->
     <div class="modal">
-         <div class="modal__overlay">
+        <div class="modal__overlay">
 
 
         </div>
         <div class="modal__body">
-            
+
             <!-- form  register -->
 
             <!-- <div class="auth-form">
@@ -567,9 +586,9 @@
                 </div>
             </div> -->
 
-             <!-- form login -->
+            <!-- form login -->
 
-             <div class="auth-form">
+            <div class="auth-form">
                 <div class="auth-form__container">
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Đăng Nhập</h3>
@@ -583,7 +602,7 @@
                         <div class="auth-form__group">
                             <input type="password" class="auth-form__input" placeholder="Mật khẩu của bạn">
                         </div>
-                        
+
                     </div>
 
                     <div class="auth-form__aside">
@@ -616,4 +635,25 @@
         </div>
     </div>
 </body>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("dropdown-menu");
+        const isVisible = dropdown.style.display === "block";
+        document.querySelectorAll(".dropdown-menu").forEach(menu => {
+            menu.style.display = "none";
+        });
+        if (!isVisible) {
+            dropdown.style.display = "block";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest(".profile-details")) {
+            document.querySelectorAll(".dropdown-menu").forEach(menu => {
+                menu.style.display = "none";
+            });
+        }
+    };
+</script>
+
 </html>
