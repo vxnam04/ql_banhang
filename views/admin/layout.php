@@ -92,10 +92,9 @@
         <i class="bx bx-menu sidebarBtn"></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search..." />
-        <i class="bx bx-search"></i>
-      </div>
+      <!-- search -->
+
+
       <div class="profile-details" onclick="toggleDropdown()">
         <img src="./images/Game Account creation and Login page.jpg" alt="Avatar" class="avatar" />
         <div class="info">

@@ -1,30 +1,35 @@
 <?php
 require_once "../config/database.php";
 
-class ProductModel {
+class ProductModel
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Database::connect();
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $stmt = $this->db->query("SELECT * FROM products");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $stmt = $this->db->prepare("SELECT * FROM products WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-     public function insertproduct($name, $price, $image,$description) {
+    public function insertproduct($name, $price, $image, $description)
+    {
         $sql = "INSERT INTO products (name, price, image, description) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$name, $price, $image,$description]);
+        return $stmt->execute([$name, $price, $image, $description]);
     }
-      // ✅ Lấy sản phẩm có phân trang
-     public function countAllProducts()
+    // ✅ Lấy sản phẩm có phân trang
+    public function countAllProducts()
     {
         $stmt = $this->db->query("SELECT COUNT(*) as total FROM products");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -39,23 +44,32 @@ class ProductModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     // edit
-   public function updateProduct($name, $price, $image, $description, $id) {
-    $stmt = $this->db->prepare("UPDATE products SET name = ?, price = ?, image = ?, description = ? WHERE id = ?");
-    $stmt->execute([$name, $price, $image, $description, $id]);
-}
+    public function updateProduct($name, $price, $image, $description, $id)
+    {
+        $stmt = $this->db->prepare("UPDATE products SET name = ?, price = ?, image = ?, description = ? WHERE id = ?");
+        $stmt->execute([$name, $price, $image, $description, $id]);
+    }
 
-// Trong ProductModel.php
-public function find($id) {
-    $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id");
-    $stmt->execute(['id' => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC); // PHẢI có return
-}
+    // Trong ProductModel.php
+    public function find($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); // PHẢI có return
+    }
 
 
-// delete
-public function deleteProduct($id) {
-    $stmt = $this->db->prepare("DELETE FROM products WHERE id = ?");
-    $stmt->execute([$id]);
-}
-
+    // delete
+    public function deleteProduct($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM products WHERE id = ?");
+        $stmt->execute([$id]);
+    }
+    // search
+    public function searchProduct($keyword)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE name LIKE :keyword");
+        $stmt->execute(['keyword' => '%' . $keyword . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

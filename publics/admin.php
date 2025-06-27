@@ -6,15 +6,15 @@
 // $controller = new $controllerClass();
 // $controller->$action();
 
-$controllerName = $_GET['controller'] ?? 'authentication';
-$action = $_GET['action'] ?? 'login';
+$controllerName = $_GET['controller'] ?? 'user';
+$action = $_GET['action'] ?? 'redichome';
 
 $controllerClass = $controllerName . 'Controller';
 $controllerFile = "../controllers/{$controllerClass}.php";
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
-    
+
     if (class_exists($controllerClass)) {
         $controller = new $controllerClass();
 
@@ -30,5 +30,3 @@ if (file_exists($controllerFile)) {
 } else {
     echo "Không tìm thấy file controller: $controllerFile";
 }
-
-?>

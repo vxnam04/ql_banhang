@@ -142,29 +142,41 @@ $user = $_SESSION['user'] ?? null;
                             <div class="profile-details" onclick="toggleDropdown()">
                                 <img src="./images/Game Account creation and Login page.jpg" alt="Avatar" class="avatar" />
                                 <div class="dropdown-header">
-                                    <strong><?= htmlspecialchars($user['name'] ?? 'Tên người dùng') ?></strong>
+                                    <strong><?= htmlspecialchars($user['name'] ?? 'Khách') ?></strong>
                                 </div>
                                 <i class="bx bx-chevron-down arrow-icon"></i>
                                 <div id="dropdown-menu" class="dropdown-menu">
-                                    <a href="#">
-                                        <i class="bx bx-user"></i>
-                                        <span>Trang cá nhân</span>
-                                    </a>
-                                    <a href="#">
-                                        <i class="bx bx-cog"></i>
-                                        <span>Cài đặt</span>
-                                    </a>
-                                    <a href="#">
-                                        <i class="bx bx-shield-quarter"></i>
-                                        <span>Quản lý tài khoản</span>
-                                    </a>
-                                    <hr />
-                                    <a href="./admin.php?controller=authentication&action=logout">
-                                        <i class="bx bx-log-out"></i>
-                                        <span>Đăng xuất</span>
-                                    </a>
+                                    <?php if (isset($_SESSION['user'])): ?>
+                                        <a href="#">
+                                            <i class="bx bx-user"></i>
+                                            <span>Trang cá nhân</span>
+                                        </a>
+                                        <a href="#">
+                                            <i class="bx bx-cog"></i>
+                                            <span>Cài đặt</span>
+                                        </a>
+                                        <a href="#">
+                                            <i class="bx bx-shield-quarter"></i>
+                                            <span>Quản lý tài khoản</span>
+                                        </a>
+                                        <hr />
+                                        <a href="./admin.php?controller=authentication&action=logout">
+                                            <i class="bx bx-log-out"></i>
+                                            <span>Đăng xuất</span>
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="./admin.php?controller=authentication&action=login">
+                                            <i class="bx bx-log-in"></i>
+                                            <span>Đăng nhập</span>
+                                        </a>
+                                        <a href="./admin.php?controller=authentication&action=register">
+                                            <i class="bx bx-user-plus"></i>
+                                            <span>Đăng ký</span>
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
+
 
                         </li>
                     </ul>
@@ -383,20 +395,6 @@ $user = $_SESSION['user'] ?? null;
                                 </ul>
                             </div>
 
-                            <div class="home-filter__page">
-                                <span class="home-filter__page-num">
-                                    <span class="home-filter__page-curent">1</span>/14
-                                </span>
-
-                                <div class="home-filter__page-control">
-                                    <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
-                                        <i class=" fas fa-chevron-left"></i>
-                                    </a>
-                                    <a href="" class="home-filter__page-btn">
-                                        <i class=" fas fa-chevron-right"></i>
-                                    </a>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -410,31 +408,12 @@ $user = $_SESSION['user'] ?? null;
                             </div>
 
                             <!-- PHÂN TRANG -->
-                            <ul class="pagination home-product__pagination">
-                                <?php if ($page > 1): ?>
-                                    <li class="pagination-item">
-                                        <a href="?controller=user&action=redichome&page=<?= $page - 1 ?>" class="pagination-item__link">
-                                            <i class="pagination-item__icon fas fa-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
 
-                                <?php for ($i = 1; $i <= $total_page; $i++): ?>
-                                    <li class="pagination-item <?= ($i == $page) ? 'pagination-item--active' : '' ?>">
-                                        <a href="?controller=user&action=redichome&page=<?= $i ?>" class="pagination-item__link"><?= $i ?></a>
-                                    </li>
-                                <?php endfor; ?>
-
-                                <?php if ($page < $total_page): ?>
-                                    <li class="pagination-item">
-                                        <a href="?controller=user&action=redichome&page=<?= $page + 1 ?>" class="pagination-item__link">
-                                            <i class="pagination-item__icon fas fa-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-
+                            <div class="product_detail">
+                                <?= $product_detail ?? '' ?>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -450,7 +429,7 @@ $user = $_SESSION['user'] ?? null;
                                 <a href="" class="footer-item__link">Trung tâm trợ giúp</a>
                             </li>
                             <li class="footer-item">
-                                <a href="" class="footer-item__link">Văn Hưng Mall</a>
+                                <a href="" class="footer-item__link"></a>
                             </li>
                             <li class="footer-item">
                                 <a href="" class="footer-item__link">Hướng dẫn mua hàng</a>
@@ -524,7 +503,7 @@ $user = $_SESSION['user'] ?? null;
                     </div>
                 </div>
                 <div class="row"></div>
-                <p class="footer__text">@2020 - Bản quyền thuộc về Công ty TNHH Nguyễn Hưng</p>
+                <p class="footer__text">@2020 - Bản quyền thuộc về Công ty TNHH </p>
             </div>
     </div>
     </footer>
