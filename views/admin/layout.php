@@ -91,6 +91,8 @@ $current_action = $_GET['action'] ?? '';
     <div class="create_product">
       <?= $create_product ?? '' ?>
       <?= $edit_product ?? '' ?>
+      <?= $create_category ?? '' ?>
+      <?= $edit_category ?? '' ?>
     </div>
   </section>
 
