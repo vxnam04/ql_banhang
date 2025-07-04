@@ -49,6 +49,12 @@ class productController
             $product = $this->model->getById($id);
 
             if ($product) {
+                // ✅ Lấy danh mục
+                require_once '../models/CategoryModel.php';
+                $categoryModel = new CategoryModel();
+                $categori = $categoryModel->getAll();
+
+                // ✅ Gọi view, có đủ $product và $categori
                 include "../views/authorized/pages/product_detail.php";
             } else {
                 echo "Không tìm thấy sản phẩm.";
@@ -57,6 +63,7 @@ class productController
             echo "Thiếu ID sản phẩm.";
         }
     }
+
 
     public function createproduct()
     {

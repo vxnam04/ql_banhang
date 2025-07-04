@@ -274,60 +274,6 @@ $user = $_SESSION['user'] ?? null;
                             <!-- Has Cart add "header__cart-list-has-cart" -->
                             <div class="header__cart-list header__cart-list--has-cart">
                                 <h4 class="header__cart-item-heading">Sản phẩm đã thêm</h4>
-                                <ul class="header__cart-list-item">
-                                    <li class="header__cart-item">
-                                        <img src="https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-1/c0.36.320.320a/p320x320/101055847_1642016052629708_6252404825904906240_n.jpg?_nc_cat=105&_nc_sid=7206a8&_nc_ohc=XDjRAENIZGsAX9N8Ohr&_nc_ht=scontent.fsgn5-7.fna&oh=7445eed0da07aca926832984ee00dc31&oe=5F4E7550" alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Nguyễn Đoàn Kiều Liên</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại: Vô cùng quí</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-1/c0.36.320.320a/p320x320/101055847_1642016052629708_6252404825904906240_n.jpg?_nc_cat=105&_nc_sid=7206a8&_nc_ohc=XDjRAENIZGsAX9N8Ohr&_nc_ht=scontent.fsgn5-7.fna&oh=7445eed0da07aca926832984ee00dc31&oe=5F4E7550" alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Gâu</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại: Hiếm</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-1/c0.36.320.320a/p320x320/101055847_1642016052629708_6252404825904906240_n.jpg?_nc_cat=105&_nc_sid=7206a8&_nc_ohc=XDjRAENIZGsAX9N8Ohr&_nc_ht=scontent.fsgn5-7.fna&oh=7445eed0da07aca926832984ee00dc31&oe=5F4E7550" alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Liên</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại: Hiếm</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
 
                                 <a href="" class="btn header__cart-view-cart btn--primary">Xem giỏ hàng</a>
                             </div>

@@ -51,18 +51,23 @@ ob_start();
                     </div>
                 </div>
 
-                <div class="product-quantity">
-                    <p>Số lượng:</p>
-                    <button>-</button>
-                    <input type="number" value="1" min="1">
-                    <button>+</button>
-                    <span>Còn <?= $product['stock'] ?? '2586' ?> sản phẩm</span>
-                </div>
+                <!-- Form Thêm vào giỏ -->
+                <form method="POST" action="admin.php?controller=Cart&action=add">
+                    <div class="product-quantity">
+                        <p>Số lượng:</p>
+                        <button type="button" id="decrease">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <button type="button" id="increase">+</button>
+                        <span>Còn <?= $product['stock'] ?? '2586' ?> sản phẩm</span>
+                    </div>
 
-                <div class="product-actions">
-                    <a href="?controller=cart&action=add&id=<?= $product['product_id'] ?>" class="btn btn-cart">🛒 Thêm Vào Giỏ Hàng</a>
-                    <a href="#" class="btn btn-buy">Mua Ngay</a>
-                </div>
+                    <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+
+                    <div class="product-actions">
+                        <button type="submit" class="btn btn-cart">🛒 Thêm Vào Giỏ Hàng</button>
+                        <a href="#" class="btn btn-buy">Mua Ngay</a>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -146,9 +151,28 @@ ob_start();
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const increaseBtn = document.getElementById("increase");
+            const decreaseBtn = document.getElementById("decrease");
+            const quantityInput = document.getElementById("quantity");
+
+            increaseBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                quantityInput.value = value + 1;
+            });
+
+            decreaseBtn.addEventListener("click", () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) quantityInput.value = value - 1;
+            });
+        });
+    </script>
+
 </body>
 
 </html>
+
 <?php
 $product_detail = ob_get_clean();
 include '../views/authorized/pages/home.php';
