@@ -71,4 +71,11 @@ class UserModel
         $stmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
         $stmt->execute([$id]);
     }
+    // find
+    public function findUser($name)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE name LIKE :keyword");
+        $stmt->execute(['keyword' => '%' . $name . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

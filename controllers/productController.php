@@ -1,5 +1,8 @@
 <?php
 require_once "../models/ProductModel.php";
+require_once "../models/CategoryModel.php";
+require_once "../models/SupplierModel.php";
+
 class productController
 {
     private $model;
@@ -11,20 +14,15 @@ class productController
 
     public function index()
     {
-        // Hiện thị danh sách sản phẩm bán trà
-        // từ model vào controller
         if (isset($_GET['name']) && $_GET['name']) {
-            // trường hợp tồn tại , và trường hợp phải có giá trị
-            // thì chạy vào đây
             $products = $this->model->searchProduct($_GET['name']);
         } else {
             $products = $this->model->getAll();
         }
 
-        // var_dump($products);
-        // die;
         include "../views/admin/product/list.php";
     }
+
     public function getProductList()
     {
         $limit = 10;
@@ -37,7 +35,6 @@ class productController
 
         $products = $this->model->getProductsByPage($start, $limit);
 
-        // ✅ return mảng dữ liệu để controller khác có thể dùng
         return [
             'show_product' => $products,
             'page' => $page,
@@ -49,9 +46,7 @@ class productController
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            require_once '../models/ProductModel.php';
-            $model = new ProductModel();
-            $product = $model->getById($id); // hoặc dùng find($id)
+            $product = $this->model->getById($id);
 
             if ($product) {
                 include "../views/authorized/pages/product_detail.php";
@@ -63,51 +58,61 @@ class productController
         }
     }
 
-
     public function createproduct()
     {
+        $categoryModel = new CategoryModel();
+        $supplierModel = new SupplierModel();
+
+        $categories = $categoryModel->getAll();
+        $suppliers = $supplierModel->getAll();
+
         require_once '../views/admin/product/create-product.php';
     }
+
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
             $price = $_POST['price'] ?? '';
             $description = $_POST['description'] ?? '';
+            $category_id = $_POST['category_id'] ?? null;
+            $supplier_id = $_POST['supplier_id'] ?? null;
             $image = '';
 
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $imageName = time() . '_' . basename($_FILES['image']['name']);
-
-                // Dùng đường dẫn tuyệt đối để tránh lỗi move_uploaded_file
                 $uploadDir = __DIR__ . '/../uploads/';
                 $imagePath = $uploadDir . $imageName;
 
-                // Kiểm tra thư mục tồn tại
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
                 }
 
-                // Di chuyển file
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
-                    // Lưu đường dẫn tương đối để hiển thị
                     $image = '../uploads/' . $imageName;
                 }
             }
 
-            $model = new ProductModel();
-            $model->insertproduct($name, $price, $image, $description);
-
+            $this->model->insertProduct($name, $price, $image, $description, $category_id, $supplier_id);
             header("Location: admin.php?controller=product&action=index");
             exit;
         }
     }
+
     public function edit()
     {
         $id = $_GET['id'];
         $product = $this->model->find($id);
+
+        $categoryModel = new CategoryModel();
+        $supplierModel = new SupplierModel();
+
+        $categories = $categoryModel->getAll();
+        $suppliers = $supplierModel->getAll();
+
         require_once '../views/admin/product/edit.php';
     }
+
     public function update()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -115,9 +120,10 @@ class productController
             $name = $_POST['name'] ?? '';
             $price = $_POST['price'] ?? '';
             $description = $_POST['description'] ?? '';
-            $image = $_POST['current_image'] ?? ''; // ảnh cũ
+            $category_id = $_POST['category_id'] ?? null;
+            $supplier_id = $_POST['supplier_id'] ?? null;
+            $image = $_POST['current_image'] ?? '';
 
-            // Nếu có upload ảnh mới
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $imageName = time() . '_' . basename($_FILES['image']['name']);
                 $uploadDir = __DIR__ . '/../uploads/';
@@ -131,12 +137,13 @@ class productController
                     $image = '../uploads/' . $imageName;
                 }
             }
-            $this->model->updateProduct($name, $price, $image, $description, $id);
+
+            $this->model->updateProduct($name, $price, $image, $description, $category_id, $supplier_id, $id);
             header("Location: admin.php?controller=product&action=index");
             exit;
         }
     }
-    // delete
+
     public function delete()
     {
         if (isset($_GET['id'])) {
@@ -146,18 +153,4 @@ class productController
         header("Location: admin.php?controller=product&action=index");
         exit;
     }
-    // search
-
-    // public function search()
-    // {
-    //     $keyword = $_GET['search'] ?? '';
-
-    //     if (!empty($keyword)) {
-    //         $products = $this->model->searchProduct($keyword);
-    //     } else {
-    //         $products = $this->model->getAll();
-    //     }
-
-    //     include "../views/product/index.php"; // View hiển thị danh sách
-    // }
 }

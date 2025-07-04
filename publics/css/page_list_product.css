@@ -1,0 +1,178 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.col {
+  padding: 5px;
+}
+
+.l-2-4 {
+  width: 20%;
+}
+
+.m-4 {
+  width: 25%;
+}
+
+.c-6 {
+  width: 50%;
+}
+
+/* Sản phẩm */
+.home-product-item {
+  display: block;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.home-product-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.home-product-item__img {
+  width: 100%;
+  padding-top: 100%; /* tạo ảnh vuông */
+  background-size: cover;
+  background-position: center;
+}
+
+.home-product-item__name {
+  font-size: 14px;
+  margin: 8px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.home-product-item__price {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 8px 8px;
+  font-size: 14px;
+}
+
+.home-product-item__price-old {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 6px;
+}
+
+.home-product-item__price-current {
+  color: #ee4d2d;
+  font-weight: bold;
+}
+
+/* Hành động */
+.home-product-item__action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+.home-product-item__like {
+  cursor: pointer;
+}
+
+.home-product-item__like--like-icon-fill {
+  color: red;
+  display: none;
+}
+
+.home-product-item__like--liked .home-product-item__like--like-icon-fill {
+  display: inline-block;
+}
+
+.home-product-item__like--like-icon-empty {
+  display: inline-block;
+}
+
+/* Đánh giá */
+.home-product-item__rating {
+  display: flex;
+  align-items: center;
+}
+
+.home-product-item__gold {
+  color: #ffce3d;
+  margin-right: 1px;
+}
+
+.home-product-item__sold {
+  margin-left: 6px;
+  color: #888;
+}
+
+/* Thương hiệu - xuất xứ */
+.home-product-item__origin {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px 8px 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Gắn nhãn yêu thích */
+.home-product-item__favourite {
+  position: absolute;
+  top: 8px;
+  left: -4px;
+  background-color: #ee4d2d;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-weight: bold;
+}
+
+.home-product-item__favourite i {
+  margin-right: 4px;
+}
+
+/* Giảm giá */
+.home-product-item__sele-off {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  width: 36px;
+  height: 32px;
+  background-color: rgba(255, 216, 64, 0.94);
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: bold;
+  color: #ee4d2d;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.home-product-item__sele-off-percent {
+  display: block;
+  font-size: 14px;
+}
+
+.home-product-item__sele-off-label {
+  font-size: 10px;
+}

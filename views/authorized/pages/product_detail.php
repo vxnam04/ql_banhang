@@ -8,27 +8,30 @@ ob_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/product-detail.css">
-    <title>Document</title>
+    <title>Chi tiết sản phẩm</title>
 </head>
 
 <body>
     <div class="product-detail-page">
         <div class="breadcrumb">
             <a href="?controller=user&action=redichome">Trang chủ</a> >
-            <a href="?controller=user&action=category&id=<?= $product['category_id'] ?? 1 ?>">Danh mục</a> >
-            <span><?= htmlspecialchars($product['name']) ?></span>
+            <a href="?controller=user&action=category&id=<?= $product['category_id'] ?? 1 ?>">
+                <?= htmlspecialchars($product['category_name'] ?? 'Danh mục') ?>
+            </a> >
+            <span><?= htmlspecialchars($product['product_name']) ?></span>
         </div>
 
         <div class="product-detail-wrapper">
-            <!-- Left: Hình ảnh sản phẩm -->
+            <!-- Hình ảnh -->
             <div class="product-gallery">
                 <div class="product-main-image">
-                    <img src="<?= $product['image'] ?>" alt="img">
+                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['product_name']) ?>">
                 </div>
             </div>
-            <!-- Right: Thông tin sản phẩm -->
+
+            <!-- Thông tin -->
             <div class="product-info">
-                <h1 class="product-title"><?= htmlspecialchars($product['name']) ?></h1>
+                <h1 class="product-title"><?= htmlspecialchars($product['product_name']) ?></h1>
                 <div class="product-rating">
                     <span>⭐ 4.8</span> | <span>37 Đánh giá</span> | <span>Đã bán 155</span>
                 </div>
@@ -53,40 +56,45 @@ ob_start();
                     <button>-</button>
                     <input type="number" value="1" min="1">
                     <button>+</button>
-                    <span>{kho}: Còn hàng</span>
+                    <span>Còn <?= $product['stock'] ?? '2586' ?> sản phẩm</span>
                 </div>
 
                 <div class="product-actions">
-                    <a href="?controller=cart&action=add&id=<?= $product['id'] ?>" class="btn btn-cart">🛒 Thêm Vào Giỏ Hàng</a>
+                    <a href="?controller=cart&action=add&id=<?= $product['product_id'] ?>" class="btn btn-cart">🛒 Thêm Vào Giỏ Hàng</a>
                     <a href="#" class="btn btn-buy">Mua Ngay</a>
                 </div>
             </div>
         </div>
 
-        <!-- Quà tặng khuyến mãi -->
+        <!-- Quà tặng -->
         <div class="product-gift">
             <h3>Mua ≥1.000 để nhận quà</h3>
             <div class="gift-content">
                 <div>
-                    <img src="uploads/<?= htmlspecialchars($product['image']) ?>" alt="">
-                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="Sản phẩm">
+                    <p><?= htmlspecialchars($product['product_name']) ?></p>
                 </div>
                 <div>+</div>
                 <div>
-                    <img src="uploads/gift.jpg" alt="">
+                    <img src="uploads/gift.jpg" alt="Gift">
                     <p class="gift-label">🎁 Quà tặng: Bộ chăm sóc bé Hamster</p>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="product-extra-info">
-        <!-- Chi tiết sản phẩm -->
+        <!-- Chi tiết -->
         <div class="product-section">
             <h2>Chi Tiết Sản Phẩm</h2>
             <table class="product-details-table">
                 <tr>
                     <td><strong>Danh Mục</strong></td>
-                    <td>Chăm Sóc Thú Cưng > Phụ kiện > Nội thất</td>
+                    <td><?= htmlspecialchars($product['category_name']) ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Nhà cung cấp</strong></td>
+                    <td><?= htmlspecialchars($product['supplier_name']) ?></td>
                 </tr>
                 <tr>
                     <td><strong>Kho</strong></td>
@@ -99,7 +107,7 @@ ob_start();
             </table>
         </div>
 
-        <!-- Mô tả sản phẩm -->
+        <!-- Mô tả -->
         <div class="product-section">
             <h2>Mô Tả Sản Phẩm</h2>
             <div class="product-description-box">
@@ -107,7 +115,7 @@ ob_start();
             </div>
         </div>
 
-        <!-- Đánh giá sản phẩm -->
+        <!-- Đánh giá -->
         <div class="product-section">
             <h2>Đánh Giá Sản Phẩm</h2>
             <div class="product-rating-summary">
@@ -131,8 +139,8 @@ ob_start();
                 <p><strong>🌸 binhbabiixxloove</strong></p>
                 <p>lắp xong xinh lắm nè, chất lượng cao nha 💕💕💕 nếu 1 người lắp thì cực, 2 người thì rất nhanh</p>
                 <div class="rating-images">
-                    <img src="uploads/<?= htmlspecialchars($product['image']) ?>" alt="feedback">
-                    <img src="uploads/<?= htmlspecialchars($product['image']) ?>" alt="feedback">
+                    <img src="uploads/sample1.jpg" alt="feedback">
+                    <img src="uploads/sample2.jpg" alt="feedback">
                 </div>
             </div>
         </div>

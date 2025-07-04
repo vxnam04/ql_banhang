@@ -53,6 +53,7 @@ class AuthenticationController
                 if (!$user) {
                     $error = "❌ Không tìm thấy tài khoản với email $email.";
                 } elseif (!password_verify($password, $user['password'])) {
+
                     $error = "❌ Email hoặc mật khẩu không đúng.";
                 } else {
                     $_SESSION['user'] = $user;
@@ -74,14 +75,12 @@ class AuthenticationController
         ob_end_flush();
     }
     public function logout()
-{
-    session_start();
-    session_unset();
-    session_destroy();
+    {
+        session_start();
+        session_unset();
+        session_destroy();
 
-    header("Location: admin.php?controller=authentication&action=login");
-    exit;
+        header("Location: admin.php?controller=authentication&action=login");
+        exit;
+    }
 }
-
-}
-?>

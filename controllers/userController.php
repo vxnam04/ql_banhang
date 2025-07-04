@@ -10,7 +10,13 @@ class UserController
     }
     public function getuser()
     {
-        $user = $this->model->getAllUsers();
+        if (isset($_GET['name']) && $_GET['name']) {
+            // trường hợp tồn tại , và trường hợp phải có giá trị
+            // thì chạy vào đây
+            $user = $this->model->finduser($_GET['name']);
+        } else {
+            $user = $this->model->getAllUsers();
+        }
         include "../views/admin/user/user.php";
     }
 

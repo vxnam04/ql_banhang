@@ -1,6 +1,8 @@
 <?php
-class Database {
-    public static function connect() {  
+class Database
+{
+    public static function connect()
+    {
         $host = 'localhost';
         $database = 'qlbanhang';
         $username = 'root';
@@ -14,4 +16,3 @@ class Database {
         }
     }
 }
-?>
