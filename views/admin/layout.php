@@ -1,12 +1,14 @@
+<?php
+$current_controller = $_GET['controller'] ?? '';
+$current_action = $_GET['action'] ?? '';
+?>
 <!DOCTYPE html>
-<!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
-  <title>Responsiive Admin Dashboard | CodingLab</title>
+  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="./css/layout.css" />
-  <!-- Boxicons CDN Link -->
   <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -19,63 +21,31 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a href="./admin.php?controller=admin&action=index" class="active">
+        <a href="./admin.php?controller=dashboard&action=index"
+          class="<?= $current_controller == 'dashboard' ? 'active' : '' ?>">
           <i class="bx bx-grid-alt"></i>
           <span class="links_name">Dashboard</span>
         </a>
       </li>
       <li>
-        <a href="./admin.php?controller=product&action=index">
+        <a href="./admin.php?controller=product&action=index"
+          class="<?= $current_controller == 'product' ? 'active' : '' ?>">
           <i class="bx bx-box"></i>
           <span class="links_name">Product</span>
         </a>
       </li>
       <li>
-        <a href="./admin.php?controller=user&action=getuser">
+        <a href="./admin.php?controller=user&action=getuser"
+          class="<?= $current_controller == 'user' ? 'active' : '' ?>">
           <i class="bx bx-list-ul"></i>
           <span class="links_name">User</span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="./admin.php?controller=category&action=index"
+          class="<?= $current_controller == 'category' ? 'active' : '' ?>">
           <i class="bx bx-pie-chart-alt-2"></i>
-          <span class="links_name">Analytics</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-coin-stack"></i>
-          <span class="links_name">Stock</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-book-alt"></i>
-          <span class="links_name">Total order</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-user"></i>
-          <span class="links_name">Team</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-message"></i>
-          <span class="links_name">Messages</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-heart"></i>
-          <span class="links_name">Favrorites</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-cog"></i>
-          <span class="links_name">Setting</span>
+          <span class="links_name">Category</span>
         </a>
       </li>
       <li class="log_out">
@@ -86,55 +56,41 @@
       </li>
     </ul>
   </div>
+
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
         <i class="bx bx-menu sidebarBtn"></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      <!-- search -->
-
-
+      <!-- Profile -->
       <div class="profile-details" onclick="toggleDropdown()">
         <img src="./images/Game Account creation and Login page.jpg" alt="Avatar" class="avatar" />
         <div class="info">
           <span class="admin-name">ADMIN</span>
-
         </div>
         <i class="bx bx-chevron-down arrow-icon"></i>
         <div id="dropdown-menu" class="dropdown-menu">
-          <a href="#">
-            <i class="bx bx-user"></i>
-            <span>Trang cá nhân</span>
-          </a>
-          <a href="#">
-            <i class="bx bx-cog"></i>
-            <span>Cài đặt</span>
-          </a>
-          <a href="#">
-            <i class="bx bx-shield-quarter"></i>
-            <span>Quản lý tài khoản</span>
-          </a>
+          <a href="#"><i class="bx bx-user"></i><span>Trang cá nhân</span></a>
+          <a href="#"><i class="bx bx-cog"></i><span>Cài đặt</span></a>
+          <a href="#"><i class="bx bx-shield-quarter"></i><span>Quản lý tài khoản</span></a>
           <hr />
           <a href="./admin.php?controller=authentication&action=logout">
-            <i class="bx bx-log-out"></i>
-            <span>Đăng xuất</span>
+            <i class="bx bx-log-out"></i><span>Đăng xuất</span>
           </a>
         </div>
       </div>
-
-
-      </div>
     </nav>
+
     <div class="content">
       <?= $content ?? '' ?>
+      <?= $dashboard ?? '' ?>
       <?= $contentuser ?? '' ?>
     </div>
-    </div>
+
     <div class="create_product">
       <?= $create_product ?? '' ?>
       <?= $edit_product ?? '' ?>
-    </div>
     </div>
   </section>
 

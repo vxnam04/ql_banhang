@@ -78,4 +78,10 @@ class UserModel
         $stmt->execute(['keyword' => '%' . $name . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function countUsers()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) AS total FROM users");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'];
+    }
 }
