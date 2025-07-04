@@ -60,7 +60,7 @@ class AuthenticationController
 
                     $role = trim(strtolower($user['role']));
                     $redirectUrl = $role === 'admin'
-                        ? 'https://localhost/MVC_QLBanHang/publics/admin.php?controller=admin&action=index'
+                        ? 'https://localhost/MVC_QLBanHang/publics/admin.php?controller=dashboard&action=index'
                         : 'https://localhost/MVC_QLBanHang/publics/admin.php?controller=user&action=redichome';
 
                     header("Location: $redirectUrl");

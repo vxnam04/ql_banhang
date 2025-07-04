@@ -32,7 +32,8 @@ class UserController
         $show_product = $data['show_product'];
         $page = $data['page'];
         $total_page = $data['total_page'];
-
+        $categoryModel = new CategoryModel();
+        $categori = $categoryModel->getAll(); // lấy danh mục
         // ✅ Thêm dòng này:
         $user = $_SESSION['user'] ?? null;
 

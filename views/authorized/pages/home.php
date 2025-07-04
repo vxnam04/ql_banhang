@@ -361,18 +361,13 @@ $user = $_SESSION['user'] ?? null;
                                 Danh mục
                             </h3>
                             <ul class="category-list">
-                                <li class="category-item category-item--active">
-                                    <a href="" class="category-item__link">Hàng độc</a>
-                                </li>
-                                <li class="category-item">
-                                    <a href="" class="category-item__link">Hàng hiếm</a>
-                                </li>
-                                <li class="category-item">
-                                    <a href="" class="category-item__link">Hàng lạ</a>
-                                </li>
+                                <?php foreach ($categori as $category): ?>
+                                    <li class="category-item"><?= htmlspecialchars($category['category_name']) ?></li>
+                                <?php endforeach; ?>
                             </ul>
                         </nav>
                     </div>
+
 
                     <div class="col l-10 m-12 c-12">
                         <div class="home-filter hide-on-tablet-and-mobile">
