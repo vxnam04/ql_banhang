@@ -140,7 +140,7 @@ $user = $_SESSION['user'] ?? null;
                         <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                         <li class="header__navbar-item header__navbar-user">
                             <div class="profile-details" onclick="toggleDropdown()">
-                                <img src="./images/Game Account creation and Login page.jpg" alt="Avatar" class="avatar" />
+                                <img src="./images/3a5977f9-a160-4af2-9a57-82f6732fcda9.jpg" alt="Avatar" class="avatar" />
                                 <div class="dropdown-header">
                                     <strong><?= htmlspecialchars($user['name'] ?? 'Khách') ?></strong>
                                 </div>
@@ -219,48 +219,51 @@ $user = $_SESSION['user'] ?? null;
                             <i class="header__logo-icon fas fa-search"></i>
                         </label>
                     </div>
-                    <a class="header__logo hide-on-tablet" href="">
-                        <img src="./images/anhlogin.jpg" alt="" class="header__logo-img">
+                    <a class="header__logo hide-on-tablet hi" href="admin.php?controller=user&action=redichome">
+                        <img src="./images/3a5977f9-a160-4af2-9a57-82f6732fcda9.jpg" alt="Logo" class="header__logo-img">
                     </a>
+
                     <input type="checkbox" hidden id="checkbox" class="header__input-temp">
 
                     <div class="header__search hide-on-mobile">
-                        <div class="header__search-input-wrap">
-                            <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
-                            <!-- Search history -->
-                            <div class="header__search-history">
-                                <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
-                                <ul class="header__search-history-list">
-                                    <li class="header__search-history-item">
-                                        <a href="">Kem dưỡng da</a>
+                        <form action="admin.php?controller=user&action=redichome" method="GET" class="header__search hide-on-mobile">
+                            <div class="header__search-input-wrap" style="position: relative;">
+                                <input type="text" name="keyword" id="searchInput"
+                                    value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>"
+                                    class="header__search-input"
+                                    placeholder="Nhập để tìm kiếm sản phẩm" autocomplete="on">
+                                <input type="hidden" name="controller" value="user">
+                                <input type="hidden" name="action" value="redichome">
+
+                                <!-- Nút clear nằm bên trong input-wrap -->
+                                <span class="clear-search" onclick="clearSearch()"
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+                cursor: pointer; color: #999; font-size: 16px; display: none;">
+                                    ❌
+                                </span>
+                            </div>
+
+                            <div class="header__search-select">
+                                <span class="header__search-select-label">Trong shop</span>
+                                <i class="header__search-select-icon fas fa-chevron-down"></i>
+                                <ul class="header__search-option">
+                                    <li class="header__search-option-item header__search-option-item--active">
+                                        <span>Trong shop</span>
+                                        <i class="fas fa-check"></i>
                                     </li>
-                                    <li class="header__search-history-item">
-                                        <a href="">Kem trị mụn</a>
-                                    </li>
-                                    <li class="header__search-history-item">
-                                        <a href="">Kem dưỡng tóc</a>
+                                    <li class="header__search-option-item">
+                                        <span>Ngoài shop</span>
+                                        <i class="fas fa-check"></i>
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="header__search-select">
-                            <span class="header__search-select-label">Trong shop</span>
-                            <i class="header__search-select-icon fas fa-chevron-down"></i>
-                            <ul class="header__search-option">
-                                <li class="header__search-option-item header__search-option-item--active">
-                                    <span>Trong shop</span>
-                                    <i class="fas fa-check"></i>
-                                </li>
-                                <li class="header__search-option-item">
-                                    <span>Ngoài shop</span>
-                                    <i class="fas fa-check"></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <button class="header__search-btn">
-                            <i class="header__search-btn-icon fas fa-search"></i>
-                        </button>
+
+                            <button type="submit" class="header__search-btn">
+                                <i class="header__search-btn-icon fas fa-search"></i>
+                            </button>
+                        </form>
                     </div>
+
                     <!-- cart layout -->
                     <div class="header__cart">
                         <div class="header__cart-warp">
@@ -308,9 +311,14 @@ $user = $_SESSION['user'] ?? null;
                             </h3>
                             <ul class="category-list">
                                 <?php foreach ($categori as $category): ?>
-                                    <li class="category-item"><?= htmlspecialchars($category['category_name']) ?></li>
+                                    <li class="category-item">
+                                        <a href="admin.php?controller=user&action=redichome&id=<?= $category['category_id'] ?>">
+                                            <?= htmlspecialchars($category['category_name']) ?>
+                                        </a>
+                                    </li>
                                 <?php endforeach; ?>
                             </ul>
+
                         </nav>
                     </div>
 
@@ -574,6 +582,27 @@ $user = $_SESSION['user'] ?? null;
             });
         }
     };
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.querySelector('.clear-search');
+
+    function toggleClearBtn() {
+        clearBtn.style.display = input.value ? 'block' : 'none';
+    }
+
+    function clearSearch() {
+        input.value = '';
+        toggleClearBtn();
+
+        // Đợi browser cập nhật input trước khi submit
+        requestAnimationFrame(() => {
+            input.form.submit();
+        });
+    }
+
+
+    // Tự động hiện nút ❌ nếu có dữ liệu
+    document.addEventListener('DOMContentLoaded', toggleClearBtn);
+    input.addEventListener('input', toggleClearBtn);
 </script>
 
 </html>

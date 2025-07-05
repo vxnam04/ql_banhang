@@ -1,5 +1,6 @@
 <?php
 require_once '../models/UserModel.php';
+require_once '../models/ProductModel.php';
 require_once __DIR__ . '/productController.php';
 class UserController
 {
@@ -27,26 +28,43 @@ class UserController
         }
 
         $productController = new ProductController();
-        $data = $productController->getProductList();
+        $categoryModel = new CategoryModel();
+        $categori = $categoryModel->getAll();
+        $user = $_SESSION['user'] ?? null;
 
+
+        // Trường hợp tìm kiếm
+        if (!empty($_GET['keyword'])) {
+            $keyword = $_GET['keyword'];
+            $data = $productController->searchProduct($keyword);
+
+            $show_product = $data['show_product'];
+            $page = $data['page'];
+            $total_page = $data['total_page'];
+
+            include "../views/authorized/pages/page_list_product.php";
+            return;
+        }
+
+        // Trường hợp lọc theo danh mục
+        if (isset($_GET['id'])) {
+            $category_id = $_GET['id'];
+            $productModel = new ProductModel();
+            $show_product = $productModel->find($category_id);
+            $page = 1;
+            $total_page = 1;
+            include "../views/authorized/pages/page_list_product.php";
+            return;
+        }
+
+        // Trường hợp mặc định: hiển thị tất cả sản phẩm
+        $data = $productController->getProductList();
         $show_product = $data['show_product'];
         $page = $data['page'];
         $total_page = $data['total_page'];
-        $categoryModel = new CategoryModel();
-        $categori = $categoryModel->getAll(); // lấy danh mục
-        // ✅ Thêm dòng này:
-        $user = $_SESSION['user'] ?? null;
 
         include "../views/authorized/pages/page_list_product.php";
     }
-
-    // public function index()
-    // {
-
-    //     session_start(); // Luôn đảm bảo session được bật
-    //     include "../views/authorized/pages/home.php";
-    //     $user = $_SESSION['user'] ?? null;
-    // }
     public function create()
     {
         include "../views/admin/user/create-user.php";

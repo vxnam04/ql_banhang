@@ -15,7 +15,7 @@ ob_start();
     <div class="product-detail-page">
         <div class="breadcrumb">
             <a href="?controller=user&action=redichome">Trang chủ</a> >
-            <a href="?controller=user&action=category&id=<?= $product['category_id'] ?? 1 ?>">
+            <a href="?controller=user&action=redichome&id=<?= $product['category_id'] ?? 1 ?>">
                 <?= htmlspecialchars($product['category_name'] ?? 'Danh mục') ?>
             </a> >
             <span><?= htmlspecialchars($product['product_name']) ?></span>

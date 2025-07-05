@@ -3,7 +3,7 @@ require_once "../models/ProductModel.php";
 require_once "../models/CategoryModel.php";
 require_once "../models/SupplierModel.php";
 
-class productController
+class ProductController
 {
     private $model;
 
@@ -12,6 +12,7 @@ class productController
         $this->model = new ProductModel();
     }
 
+    // ✅ Admin: danh sách sản phẩm
     public function index()
     {
         if (isset($_GET['name']) && $_GET['name']) {
@@ -23,6 +24,7 @@ class productController
         include "../views/admin/product/list.php";
     }
 
+    // ✅ Trang chủ: hiển thị sản phẩm có phân trang
     public function getProductList()
     {
         $limit = 10;
@@ -42,6 +44,26 @@ class productController
         ];
     }
 
+    // ✅ Trang chủ: tìm kiếm sản phẩm có phân trang
+    public function searchProduct($keyword)
+    {
+        $limit = 10;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $page = max(1, $page);
+        $offset = ($page - 1) * $limit;
+
+        $products = $this->model->search($keyword, $limit, $offset);
+        $total = $this->model->countSearch($keyword);
+        $total_page = ceil($total / $limit);
+
+        return [
+            'show_product' => $products,
+            'page' => $page,
+            'total_page' => $total_page
+        ];
+    }
+
+    // ✅ Trang chi tiết sản phẩm
     public function productDetail()
     {
         if (isset($_GET['id'])) {
@@ -49,12 +71,8 @@ class productController
             $product = $this->model->getById($id);
 
             if ($product) {
-                // ✅ Lấy danh mục
-                require_once '../models/CategoryModel.php';
                 $categoryModel = new CategoryModel();
                 $categori = $categoryModel->getAll();
-
-                // ✅ Gọi view, có đủ $product và $categori
                 include "../views/authorized/pages/product_detail.php";
             } else {
                 echo "Không tìm thấy sản phẩm.";
@@ -64,7 +82,7 @@ class productController
         }
     }
 
-
+    // ✅ Admin: form tạo sản phẩm
     public function createproduct()
     {
         $categoryModel = new CategoryModel();
@@ -76,6 +94,7 @@ class productController
         require_once '../views/admin/product/create-product.php';
     }
 
+    // ✅ Admin: xử lý lưu sản phẩm mới
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -106,6 +125,7 @@ class productController
         }
     }
 
+    // ✅ Admin: form chỉnh sửa
     public function edit()
     {
         $id = $_GET['id'];
@@ -120,6 +140,7 @@ class productController
         require_once '../views/admin/product/edit.php';
     }
 
+    // ✅ Admin: xử lý cập nhật
     public function update()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -151,6 +172,7 @@ class productController
         }
     }
 
+    // ✅ Admin: xóa sản phẩm
     public function delete()
     {
         if (isset($_GET['id'])) {
