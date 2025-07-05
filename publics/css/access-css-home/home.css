@@ -101,3 +101,6 @@
   margin-left: 30px;
   font-family: "Pacifico", cursive;
 }
+a {
+  text-decoration: none; /* Giữ ở đây chứ không ở .category-list */
+}

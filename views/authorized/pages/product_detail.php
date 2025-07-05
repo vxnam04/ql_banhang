@@ -40,15 +40,13 @@ ob_start();
                     <?= number_format($product['price'], 0, ',', '.') ?>đ
                 </div>
 
-                <div class="product-options">
-                    <p>Chọn loại:</p>
-                    <div class="option-buttons">
-                        <button>Hồng vip</button>
-                        <button>Trắng vip</button>
-                        <button>Hồng thường</button>
-                        <button>Trắng thường</button>
-                        <button>Hồng đen</button>
-                    </div>
+                <div>
+                    <p><strong>Danh Mục</strong></p>
+                    <p><?= htmlspecialchars($product['category_name']) ?></p>
+                </div>
+                <div>
+                    <p><strong>Nhà cung cấp</strong></p>
+                    <p><?= htmlspecialchars($product['supplier_name']) ?></p>
                 </div>
 
                 <!-- Form Thêm vào giỏ -->
