@@ -310,8 +310,16 @@ $user = $_SESSION['user'] ?? null;
                                 Danh mục
                             </h3>
                             <ul class="category-list">
+
+                                <li class="category-item">
+
+                                    <a href="admin.php?controller=user&action=redichome">
+                                        Tất cả sản phẩm
+                                    </a>
+                                </li>
                                 <?php foreach ($categori as $category): ?>
                                     <li class="category-item">
+
                                         <a href="admin.php?controller=user&action=redichome&id=<?= $category['category_id'] ?>">
                                             <?= htmlspecialchars($category['category_name']) ?>
                                         </a>
