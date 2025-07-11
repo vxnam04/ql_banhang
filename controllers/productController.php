@@ -129,7 +129,8 @@ class ProductController
     public function edit()
     {
         $id = $_GET['id'];
-        $product = $this->model->find($id);
+        $product = $this->model->findById($id);
+
 
         $categoryModel = new CategoryModel();
         $supplierModel = new SupplierModel();

@@ -55,6 +55,20 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findById($product_id)
+    {
+        $sql = "SELECT p.*, c.category_name, s.supplier_name
+            FROM products p
+            JOIN categories c ON p.category_id = c.category_id
+            JOIN suppliers s ON p.supplier_id = s.supplier_id
+            WHERE p.product_id = :product_id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 
     // ✅ Thêm sản phẩm
