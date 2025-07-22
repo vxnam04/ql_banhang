@@ -6,12 +6,10 @@ require_once "../models/SupplierModel.php";
 class ProductController
 {
     private $model;
-
     public function __construct()
     {
         $this->model = new ProductModel();
     }
-
     // ✅ Admin: danh sách sản phẩm
     public function index()
     {

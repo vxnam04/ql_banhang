@@ -9,8 +9,6 @@ class CategoryController
     {
         $this->model = new CategoryModel();
     }
-
-
     public function index()
     {
         if (isset($_GET['name']) && $_GET['name']) {
@@ -21,7 +19,6 @@ class CategoryController
 
         include "../views/admin/category/category.php";
     }
-
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,8 +34,6 @@ class CategoryController
 
         include '../views/admin/category/create-category.php';
     }
-
-
     public function edit()
     {
         $id = $_GET['category_id'] ?? null;
@@ -50,7 +45,6 @@ class CategoryController
             echo "Không tìm thấy ID danh mục.";
         }
     }
-
     public function update()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -67,8 +61,6 @@ class CategoryController
             }
         }
     }
-
-
     public function delete()
     {
         $category_id = $_GET['category_id'] ?? null;

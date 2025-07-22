@@ -4,7 +4,6 @@ require_once "../config/database.php";
 class CategoryModel
 {
     private $db;
-
     public function __construct()
     {
         $this->db = Database::connect();
@@ -27,21 +26,16 @@ class CategoryModel
         $stmt = $this->db->prepare("INSERT INTO categories(category_name, description) VALUES (?, ?)");
         return $stmt->execute([$category_name, $description]);
     }
-
     public function update($id, $name, $description)
     {
         $stmt = $this->db->prepare("UPDATE categories SET category_name = ?, description = ? WHERE category_id = ?");
         return $stmt->execute([$name, $description, $id]);
     }
-
-
-
     public function delete($category_id)
     {
         $stmt = $this->db->prepare("DELETE FROM categories WHERE category_id = ?");
         return $stmt->execute([$category_id]);
     }
-
     public function searchCategory($keyword)
     {
         $sql = "SELECT * FROM categories WHERE category_name LIKE :keyword ORDER BY category_id DESC";
