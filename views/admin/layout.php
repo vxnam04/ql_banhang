@@ -17,7 +17,7 @@ $current_action = $_GET['action'] ?? '';
   <div class="sidebar">
     <div class="logo-details">
       <i class="bx bxl-c-plus-plus"></i>
-      <span class="logo_name">CodingLab</span>
+      <span class="logo_name">NABI</span>
     </div>
     <ul class="nav-links">
       <li>
@@ -86,6 +86,7 @@ $current_action = $_GET['action'] ?? '';
       <?= $content ?? '' ?>
       <?= $dashboard ?? '' ?>
       <?= $contentuser ?? '' ?>
+      <?= $categories ?? '' ?>
     </div>
 
     <div class="create_product">

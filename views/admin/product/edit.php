@@ -30,7 +30,7 @@ ob_start();
 
          <div class="form-group">
             <label for="price">Giá:</label>
-            <input type="number" name="price" id="price" class="form-input" value="<?= $product['price'] ?>">
+            <input type="text" name="price" id="price" class="form-input" value="<?= $product['price'] ?>">
          </div>
 
          <div class="form-group">

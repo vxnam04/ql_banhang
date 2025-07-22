@@ -54,9 +54,12 @@ class UserModel
     // sua user
     public function updateUser($id, $name, $email, $password)
     {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
         $sql = $this->conn->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
-        $sql->execute([$id, $name, $email, $password]);
+        return $sql->execute([$name, $email, $passwordHash, $id]);
     }
+
 
     public function find($id)
     {
