@@ -86,6 +86,7 @@ $current_action = $_GET['action'] ?? '';
       <?= $content ?? '' ?>
       <?= $dashboard ?? '' ?>
       <?= $contentuser ?? '' ?>
+      <?= $categories ?? '' ?>
     </div>
 
     <div class="create_product">

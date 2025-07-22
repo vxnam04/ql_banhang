@@ -10,13 +10,16 @@ class CategoryController
         $this->model = new CategoryModel();
     }
 
+
     public function index()
     {
-        $categories = $this->model->getAll();
-        ob_start();
-        include '../views/admin/category/category.php';
-        $content = ob_get_clean();
-        include '../views/admin/layout.php';
+        if (isset($_GET['name']) && $_GET['name']) {
+            $categories = $this->model->searchCategory($_GET['name']);
+        } else {
+            $categories = $this->model->getAll();
+        }
+
+        include "../views/admin/category/category.php";
     }
 
     public function create()

@@ -41,4 +41,12 @@ class CategoryModel
         $stmt = $this->db->prepare("DELETE FROM categories WHERE category_id = ?");
         return $stmt->execute([$category_id]);
     }
+
+    public function searchCategory($keyword)
+    {
+        $sql = "SELECT * FROM categories WHERE category_name LIKE :keyword ORDER BY category_id DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['keyword' => '%' . $keyword . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

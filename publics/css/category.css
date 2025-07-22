@@ -1,0 +1,76 @@
+.category-table-container {
+  padding: 20px;
+  background-color: #f4f6f9;
+}
+
+.category-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-category-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.add-category-btn:hover {
+  background-color: #0056b3;
+  transition: background-color 0.2s;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-table th,
+.category-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.category-table th {
+  background-color: #343a40;
+  color: white;
+  font-weight: bold;
+}
+
+.category-table td {
+  color: #333;
+}
+
+/* Nút hành động */
+.edit-btn {
+  background-color: #28a745;
+  color: #fff;
+  padding: 6px 12px;
+  margin-right: 5px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
